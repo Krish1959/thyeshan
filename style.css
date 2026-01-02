@@ -1,0 +1,318 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-blue: #1e3a8a;
+    --secondary-blue: #3b82f6;
+    --yellow-ochre: #d4a574;
+    --dark-bg: #1a1a2e;
+    --light-text: #ffffff;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: var(--light-text);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Top Frame Styles (80% height) */
+.top-frame {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.top-frame::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Page 1 - Logo Container */
+.logo-container {
+    text-align: center;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+}
+
+.company-logo {
+    max-width: 500px;
+    width: 90%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 20px 60px rgba(74, 144, 226, 0.5);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.page-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-top: 2rem;
+    background: linear-gradient(90deg, #4a90e2, #67b6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+}
+
+/* Page 2 - Avatar Container */
+.avatar-container {
+    text-align: center;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+}
+
+.avatar-image {
+    max-width: 400px;
+    width: 90%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(74, 144, 226, 0.6);
+    border: 3px solid var(--secondary-blue);
+    transition: transform 0.3s ease;
+}
+
+.avatar-image:hover {
+    transform: scale(1.05);
+}
+
+.avatar-description {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 1.5rem auto;
+    color: #b8c5d6;
+    line-height: 1.6;
+}
+
+/* Page 3 - Development Container */
+.development-container {
+    text-align: center;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+    padding: 2rem;
+}
+
+.dev-icon {
+    margin-bottom: 2rem;
+}
+
+.dev-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--secondary-blue);
+    text-shadow: 0 0 20px rgba(74, 144, 226, 0.7);
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.dev-subtitle {
+    font-size: 1.5rem;
+    color: #b8c5d6;
+    margin-bottom: 3rem;
+}
+
+.progress-bar {
+    width: 80%;
+    max-width: 500px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 2rem auto;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--secondary-blue), #67b6ff);
+    border-radius: 10px;
+    animation: progress 2s ease-in-out infinite;
+}
+
+@keyframes progress {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 0%; }
+}
+
+.dev-message {
+    font-size: 1.1rem;
+    color: #8b98a8;
+    margin-top: 2rem;
+}
+
+/* Bottom Frame Styles (20% height) */
+.bottom-frame {
+    height: 20vh;
+    width: 100%;
+    background: var(--yellow-ochre);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--primary-blue);
+    background: white;
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn:hover {
+    transform: scale(1.1);
+    background: var(--secondary-blue);
+    color: white;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+}
+
+.nav-btn.active {
+    background: var(--primary-blue);
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
+}
+
+/* Company Name */
+.company-name {
+    flex: 1;
+    text-align: right;
+}
+
+.company-name h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-blue);
+    text-shadow: 
+        2px 2px 0px rgba(255, 255, 255, 0.3),
+        4px 4px 10px rgba(0, 0, 0, 0.2);
+    letter-spacing: 3px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .company-logo {
+        max-width: 300px;
+    }
+
+    .avatar-image {
+        max-width: 300px;
+    }
+
+    .dev-title {
+        font-size: 2rem;
+    }
+
+    .bottom-frame {
+        padding: 0 1.5rem;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .company-name {
+        text-align: center;
+    }
+
+    .company-name h2 {
+        font-size: 1.5rem;
+    }
+
+    .nav-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .nav-buttons {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .company-name h2 {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .dev-title {
+        font-size: 1.5rem;
+    }
+
+    .avatar-description {
+        font-size: 1rem;
+    }
+}
