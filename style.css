@@ -46,6 +46,9 @@ body {
     height: 200%;
     background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
+    /* CRITICAL FIX: prevents background from blocking button clicks */
+    pointer-events: none; 
+    z-index: 0;
 }
 
 @keyframes rotate {
@@ -53,13 +56,15 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Page 1 - Logo Container */
-.logo-container {
+/* Unified Container Style for all pages */
+.logo-container, .avatar-container, .development-container, .iframe-container {
     text-align: center;
-    z-index: 1;
+    z-index: 10;
+    position: relative;
     animation: fadeInUp 1s ease-out;
 }
 
+/* Page 1 - Logo */
 .company-logo {
     max-width: 500px;
     width: 90%;
@@ -74,7 +79,7 @@ body {
     50% { transform: translateY(-20px); }
 }
 
-.page-title {
+.page-title, .iframe-title {
     font-family: 'Orbitron', sans-serif;
     font-size: 3rem;
     font-weight: 900;
@@ -86,13 +91,7 @@ body {
     text-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
 }
 
-/* Page 2 - Avatar Container */
-.avatar-container {
-    text-align: center;
-    z-index: 1;
-    animation: fadeInUp 1s ease-out;
-}
-
+/* Page 2 - Static Avatar */
 .avatar-image {
     max-width: 400px;
     width: 90%;
@@ -107,7 +106,7 @@ body {
     transform: scale(1.05);
 }
 
-.avatar-description {
+.avatar-description, .iframe-description {
     font-size: 1.2rem;
     max-width: 600px;
     margin: 1.5rem auto;
@@ -115,64 +114,26 @@ body {
     line-height: 1.6;
 }
 
-/* Page 3 - Development Container */
-.development-container {
-    text-align: center;
-    z-index: 1;
-    animation: fadeInUp 1s ease-out;
-    padding: 2rem;
-}
-
-.dev-icon {
-    margin-bottom: 2rem;
-}
-
-.dev-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--secondary-blue);
-    text-shadow: 0 0 20px rgba(74, 144, 226, 0.7);
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-}
-
-.dev-subtitle {
-    font-size: 1.5rem;
-    color: #b8c5d6;
-    margin-bottom: 3rem;
-}
-
-.progress-bar {
-    width: 80%;
-    max-width: 500px;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    margin: 2rem auto;
+/* Page 3 - iFrame Styles */
+.iframe-wrapper {
+    width: 90vw;
+    max-width: 800px;
+    height: 450px;
+    margin: 0 auto;
+    border-radius: 15px;
     overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--secondary-blue);
+    background: #000;
 }
 
-.progress-fill {
+.live-avatar-iframe {
+    width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, var(--secondary-blue), #67b6ff);
-    border-radius: 10px;
-    animation: progress 2s ease-in-out infinite;
+    border: none;
 }
 
-@keyframes progress {
-    0% { width: 0%; }
-    50% { width: 70%; }
-    100% { width: 0%; }
-}
-
-.dev-message {
-    font-size: 1.1rem;
-    color: #8b98a8;
-    margin-top: 2rem;
-}
-
-/* Bottom Frame Styles (20% height) */
+/* Bottom Frame (Navigation) */
 .bottom-frame {
     height: 20vh;
     width: 100%;
@@ -184,7 +145,6 @@ body {
     box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Navigation Buttons */
 .nav-buttons {
     display: flex;
     gap: 1.5rem;
@@ -205,34 +165,16 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.nav-btn:hover {
-    transform: scale(1.1);
-    background: var(--secondary-blue);
-    color: white;
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
-}
-
-.nav-btn.active {
+.nav-btn:hover, .nav-btn.active {
     background: var(--primary-blue);
     color: white;
-    transform: scale(1.15);
-    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.6);
-}
-
-/* Company Name */
-.company-name {
-    flex: 1;
-    text-align: right;
+    transform: scale(1.1);
 }
 
 .company-name h2 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.5rem;
-    font-weight: 900;
     color: var(--primary-blue);
-    text-shadow: 
-        2px 2px 0px rgba(255, 255, 255, 0.3),
-        4px 4px 10px rgba(0, 0, 0, 0.2);
     letter-spacing: 3px;
     animation: pulse 2s ease-in-out infinite;
 }
@@ -242,77 +184,14 @@ body {
     50% { transform: scale(1.02); }
 }
 
-/* Fade In Animation */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Design */
+/* Responsive fixes */
 @media (max-width: 768px) {
-    .page-title {
-        font-size: 2rem;
-    }
-
-    .company-logo {
-        max-width: 300px;
-    }
-
-    .avatar-image {
-        max-width: 300px;
-    }
-
-    .dev-title {
-        font-size: 2rem;
-    }
-
-    .bottom-frame {
-        padding: 0 1.5rem;
-        flex-direction: column;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .company-name {
-        text-align: center;
-    }
-
-    .company-name h2 {
-        font-size: 1.5rem;
-    }
-
-    .nav-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
-    }
-
-    .nav-buttons {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .page-title {
-        font-size: 1.5rem;
-    }
-
-    .company-name h2 {
-        font-size: 1.2rem;
-        letter-spacing: 1px;
-    }
-
-    .dev-title {
-        font-size: 1.5rem;
-    }
-
-    .avatar-description {
-        font-size: 1rem;
-    }
+    .page-title, .iframe-title { font-size: 2rem; }
+    .iframe-wrapper { height: 300px; }
+    .bottom-frame { flex-direction: column; padding: 1rem; }
 }
